@@ -1,0 +1,109 @@
+html, body {
+	height: 100%;
+}
+body {
+	font-family: 'Roboto', sans-serif;
+	background: #fffff8;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	flex-direction: column;
+	overflow-x: hidden;
+}
+
+#navbar {
+	background: #183048;
+	display: initial; /* Toggles off `display: flex` from Bootstrap */
+}
+#navbar .dropdown-menu {
+    background: #285078;
+}
+#navbar .dropdown-menu .dropdown-item {
+    color: #fff;
+}
+#navbar .dropdown-menu .dropdown-item:hover,
+#navbar .dropdown-menu .dropdown-item:focus {
+    background: #306090;
+}
+#navbar .dropdown-menu .dropdown-item:active {
+    background: #3870a8;
+}
+#navbar .dropdown-menu .dropdown-item.active {
+    background: #4080c0;
+}
+
+.mcq-grid {
+	display: inline-grid;
+}
+.mcq-grid > * {
+	width: auto;
+	display: flex;
+	border: 2px solid #ffaaaa;
+}
+.mcq-grid > * + * {
+	display: flex;
+	border-top: 0;
+}
+.mcq-grid > * > * {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 2em;
+	height: 3em;
+	text-align: center;
+	/* border: 1px solid #ffcfc0; */
+}
+.mcq-grid > * > * .label {
+	line-height: 1;
+	/* height: 2em; */
+}
+.mcq-grid > * > .index .label {
+	/* line-height: 2em; */
+	font-size: 1.5rem;
+	text-align: right;
+}
+.mcq-grid > * > *:not(.index) .label {
+	color: #ffaaaa;
+}
+.mcq-grid > * > * .input {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	flex-grow: 1;
+	cursor: pointer;
+}
+.mcq-grid > * > * .input:last-child {
+	background: #ffaaaa;
+}
+.mcq-grid > * > * .input > * {
+	background: #fffff8;
+	width: 1em;
+	height: 0.5em;
+	border: 2px solid #ffcfc0;
+	border-radius: 5px;
+	margin: 0 auto;
+}
+
+#main {
+	max-width: 960px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 20px 0;
+	flex: 1 0;
+}
+#main h1 { font-size: 4em; font-weight: bold }
+
+#footer {
+	background: rgba(0, 0, 0, .1);
+	padding: 20px;
+	flex-shrink: 0;
+}
+@media (min-width: 992px) {
+	#footer .container {
+		max-width: 960px;
+	}
+}
+#footer ul { padding: 0 }
+#footer ul > li { display: inline-block }
+#footer ul > li + li { margin-left: 5px }
+#footer ul > li + li:before { content: "|"; margin-right: 10px }

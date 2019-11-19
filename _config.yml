@@ -1,0 +1,9 @@
+# Site configuration
+title: MCQ Online
+description: MCQ Online
+keywords: Epidocs, MCQ, online, EPITA
+author: Matiboux
+lang: en
+
+# Jekyll confiuration
+exclude: [CNAME]
