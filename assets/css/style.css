@@ -114,6 +114,12 @@ body {
 	font-weight: bold;
 	text-transform: uppercase;
 }
+.mcq-grid .submission-box {
+	display: grid;
+}
+.mcq-grid .submission-box > * + * {
+	margin-top: .5em;
+}
 .mcq-grid .score .full, .mcq-grid .score .final {
 	font-weight: bold;
 }
