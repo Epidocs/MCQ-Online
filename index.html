@@ -1,8 +1,74 @@
 ---
 layout: default
-newsline: true
 ---
 
-<h1>MCQ Online</h1>
+<h2>MCQ Online</h2>
 
-<p>List of qcm...</p>
+<p>Welcome on the online tool for practicing your MCQ exams. Need help? Look at <a href="#">the instructions</a>.</p>
+
+<div id="subjectWrapper" style="display: none">
+	<div class="input-group">
+		<div class="input-group-prepend">
+			<span class="input-group-text">Exam subject:</span>
+		</div>
+		<div class="input-group-prepend">
+			<span class="input-group-text lang"></span>
+		</div>
+		<div class="input-group-append">
+			<a href="#" class="btn btn-link" target="_blank"></a>
+		</div>
+	</div>
+</div>
+
+<div id="columnTemplateWrapper" style="display: none">
+	<div class="column">
+		{% for j in (1..10) %}
+			<div class="item">
+				{% assign index = i | times: 10 | plus: j %}
+				<div class="index">
+					<div class="label">
+						{{ index }}
+					</div>
+					<div class="check"><i class="fas fa-check fa-fw"></i></div>
+					<div class="times"><i class="fas fa-times fa-fw"></i></div>
+				</div>
+				
+				{% assign labels = "A, B, C, D, E" | split: ", " %}
+				{% for label in labels %}
+					<div>
+						<div class="input">
+							<div class="gap"></div>
+							<input name="q{{ label }}0" type="hidden" value="0" />
+						</div>
+						<div class="label">{{ label }}</div>
+						<div class="input">
+							<div class="gap"></div>
+							<input name="q{{ label }}1" type="hidden" value="0" />
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<form class="mcq-grid" action="#" method="post">
+	<div class="subject-box" style="display: none">
+		<!-- <h4>Exam subject files:</h4> -->
+	</div>
+	<div class="submission-box">
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text">The MCQ data:</span>
+			</div>
+			<input class="form-control d-inline" name="mcqid" type="text" placeholder="MCQ data URL" />
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit" disabled>Load data</button>
+				<button class="btn btn-secondary" type="reset">Reset</button>
+			</div>
+		</div>
+	</div>
+	<div class="score" style="display: none">
+		Your full score is <span class="full"></span>, which makes your final grade of <span class="final"></span>! Check your corrected answers above.
+	</div>
+</form>

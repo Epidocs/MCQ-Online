@@ -11,40 +11,28 @@ body {
 	overflow-x: hidden;
 }
 
-#navbar {
-	background: #183048;
-	display: initial; /* Toggles off `display: flex` from Bootstrap */
-}
-#navbar .dropdown-menu {
-    background: #285078;
-}
-#navbar .dropdown-menu .dropdown-item {
-    color: #fff;
-}
-#navbar .dropdown-menu .dropdown-item:hover,
-#navbar .dropdown-menu .dropdown-item:focus {
-    background: #306090;
-}
-#navbar .dropdown-menu .dropdown-item:active {
-    background: #3870a8;
-}
-#navbar .dropdown-menu .dropdown-item.active {
-    background: #4080c0;
-}
-
 .mcq-grid {
-	display: inline-grid;
+	display: inline-block;
+	width: 100%;
+	margin-top: -10px;
 }
 .mcq-grid > * {
+	margin-top: 10px;
+}
+.mcq-grid .column {
+	display: inline-grid;
+	margin-right: 5px;
+}
+.mcq-grid .column > .item {
 	width: auto;
 	display: flex;
 	border: 2px solid #ffaaaa;
 }
-.mcq-grid > * + * {
+.mcq-grid .column > .item + * {
 	display: flex;
 	border-top: 0;
 }
-.mcq-grid > * > * {
+.mcq-grid .column > .item > * {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -53,29 +41,49 @@ body {
 	text-align: center;
 	/* border: 1px solid #ffcfc0; */
 }
-.mcq-grid > * > * .label {
+.mcq-grid .column > .item > * .label {
 	line-height: 1;
 	/* height: 2em; */
 }
-.mcq-grid > * > .index .label {
+.mcq-grid .column > .item > .index .label {
 	/* line-height: 2em; */
 	font-size: 1.5rem;
 	text-align: right;
+	margin-right: 2px;
 }
-.mcq-grid > * > *:not(.index) .label {
+.mcq-grid .column > .item > .index .check, .mcq-grid .column > .item > .index .times {
+	position: absolute;
+	display: none;
+	font-size: 1.5em;
+	margin-top: -20px;
+	margin-left: -10px;
+}
+.mcq-grid .column > .item > .index .check {
+	color: #40c040;
+}
+.mcq-grid .column > .item > .index .times {
+	color: #c04040;
+}
+.mcq-grid .column > .item.valid > .index .check {
+	display: block;
+}
+.mcq-grid .column > .item.invalid > .index .times {
+	display: block;
+}
+.mcq-grid .column > .item > *:not(.index) .label {
 	color: #ffaaaa;
 }
-.mcq-grid > * > * .input {
+.mcq-grid .column > .item > * .input {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	flex-grow: 1;
 	cursor: pointer;
 }
-.mcq-grid > * > * .input:last-child {
+.mcq-grid .column > .item > * .input:last-child {
 	background: #ffaaaa;
 }
-.mcq-grid > * > * .input > * {
+.mcq-grid .column > .item > * .input > * {
 	background: #fffff8;
 	width: 1em;
 	height: 0.5em;
@@ -83,9 +91,38 @@ body {
 	border-radius: 5px;
 	margin: 0 auto;
 }
+.mcq-grid .column > .item > * .input.active > * {
+	background: #404040;
+}
+.mcq-grid .column > .item.valid > * .input.active > * {
+	background: #40c040;
+}
+.mcq-grid .column > .item.invalid > * .input.active > * {
+	background: #c04040;
+}
+.mcq-grid .column > .item.invalid > * .input.active:last-child > * {
+	background: #4080c0;
+}
+.mcq-grid .subject-box, .mcq-grid .submission-box {
+	padding: 1em;
+	border: 2px solid #ffaaaa;
+}
+.mcq-grid .subject-box .input-group + * {
+	margin-top: .5rem;
+}
+.mcq-grid .subject-box .input-group .lang {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.mcq-grid .score .full, .mcq-grid .score .final {
+	font-weight: bold;
+}
+.mcq-grid .score .final {
+	padding: 0 .5rem;
+	font-size: 1.5em;
+}
 
 #main {
-	max-width: 960px;
 	width: 100%;
 	margin: 0 auto;
 	padding: 20px 0;
@@ -97,11 +134,6 @@ body {
 	background: rgba(0, 0, 0, .1);
 	padding: 20px;
 	flex-shrink: 0;
-}
-@media (min-width: 992px) {
-	#footer .container {
-		max-width: 960px;
-	}
 }
 #footer ul { padding: 0 }
 #footer ul > li { display: inline-block }
