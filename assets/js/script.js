@@ -37,6 +37,12 @@ $(document).ready(function() {
 			
 			// console.log(mcqid);
 			
+			gtag('event', 'load', {
+				event_category: 'MCQ data URL',
+				event_label: mcqid,
+				transport_type: 'beacon'
+			});
+			
 			$.getJSON(mcqid).done(function(data) {
 				console.log(data);
 				
