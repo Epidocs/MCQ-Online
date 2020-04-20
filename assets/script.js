@@ -13,13 +13,14 @@ $(document).ready(function() {
 	mcqdata = {
 		// Default values
 		subject_urls: null,
-		nb_questions: 1,
+		score_valid: 1,
+		score_invalid: 0,
+		score_missing: null,
 		answers: [
 			null, // 0 is not a question
 			"AB"
 		],
-		score_valid: 2,
-		score_invalid: -1
+		nb_questions: 1
 	};
 	
 	$('#mcq-grid').on('submit', function(e) {
@@ -47,11 +48,12 @@ $(document).ready(function() {
 				console.log(data);
 				
 				// Update mcqdata
-				mcqdata.subject_urls = data.subject_urls;
-				mcqdata.answers = data.answers;
-				mcqdata.nb_questions = data.answers.length - 1;
-				mcqdata.score_valid = data.score_valid;
-				mcqdata.score_invalid = data.score_invalid;
+				if(typeof data.subject_urls == "object") mcqdata.subject_urls = data.subject_urls;
+				if(typeof data.answers == "object") mcqdata.answers = data.answers;
+				mcqdata.nb_questions = mcqdata.answers.length - 1;
+				if(typeof data.score_valid == "number") mcqdata.score_valid = data.score_valid;
+				if(typeof data.score_invalid == "number") mcqdata.score_invalid = data.score_invalid;
+				if(typeof data.score_missing == "number") mcqdata.score_missing = data.score_missing;
 				
 				if(mcqdata.subject_urls)
 				{
@@ -134,7 +136,9 @@ $(document).ready(function() {
 				console.log(answer == correction);
 				
 				// Compare with correct answers
-				if(answer == correction)
+				if(correction === null) // null Question
+					return; // Skip
+				else if(answer == correction) // Valid answer
 				{
 					if(answer == '')
 						return true; // Continue
@@ -143,11 +147,19 @@ $(document).ready(function() {
 					score += mcqdata.score_valid;
 					count++;
 				}
-				else
+				else if(mcqdata.score_missing != null && !answer) // Missing answer
+				{
+					$(this).addClass('invalid');
+					score += mcqdata.score_missing;
+					count++;
+				}
+				else // Invalid answer
 				{
 					$(this).addClass('invalid');
 					score += mcqdata.score_invalid;
 					count++;
+					
+					if(correction != null)
 					
 					// Fill second inputs with correct answers
 					for(var i = 0; i <= correction.length; i++)
