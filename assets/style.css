@@ -41,6 +41,9 @@ body {
 	text-align: center;
 	/* border: 1px solid #ffcfc0; */
 }
+.mcq-grid.large-grid .column > .item > .index {
+	width: 3em;
+}
 .mcq-grid .column > .item > * .label {
 	line-height: 1;
 	/* height: 2em; */

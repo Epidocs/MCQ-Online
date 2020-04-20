@@ -2,9 +2,9 @@ $(document).ready(function() {
 	// Auto-fill from the URL parameters
 	var matches = window.location.href.match(/.+\?(.+)&?/);
 	if(matches)
-		$('.mcq-grid [name="mcqid"]').val(matches[1]);
+		$('#mcq-grid [name="mcqid"]').val(matches[1]);
 	
-	$('.mcq-grid').on('click', '.input', function() {
+	$('#mcq-grid').on('click', '.input', function() {
 		// $(this).toggleClass('active');
 		$(this).addClass('active');
 		$(this).find('input').val($(this).hasClass('active') ? 1 : 0);
@@ -22,7 +22,7 @@ $(document).ready(function() {
 		score_invalid: -1
 	};
 	
-	$('.mcq-grid').on('submit', function(e) {
+	$('#mcq-grid').on('submit', function(e) {
 		e.preventDefault();
 		
 		var $this = $(this);
@@ -65,6 +65,9 @@ $(document).ready(function() {
 					});
 				}
 				
+				if(mcqdata.nb_questions >= 100) $('#mcq-grid').addClass('large-grid');
+				else $('#mcq-grid').removeClass('large-grid');
+					
 				var n = Math.ceil(mcqdata.nb_questions / 10);
 				for(var i = 0; i < n; i++)
 				{
@@ -72,7 +75,7 @@ $(document).ready(function() {
 					$column.find('.index .label').map(function() {
 						$(this).text(i * 10 + parseInt($(this).text()));
 					});
-					$column.insertBefore('.mcq-grid .submission-box');
+					$column.insertBefore('#mcq-grid .submission-box');
 				}
 				
 				$mcqid.prop('disabled', true);
@@ -126,9 +129,9 @@ $(document).ready(function() {
 				
 				var correction = typeof mcqdata.answers[index] != "undefined" ? mcqdata.answers[index] : "";
 				
-				// console.log(answer);
-				// console.log(correction);
-				// console.log(answer == correction);
+				console.log(answer);
+				console.log(correction);
+				console.log(answer == correction);
 				
 				// Compare with correct answers
 				if(answer == correction)
@@ -177,7 +180,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('.mcq-grid').on('reset', function(e) {
+	$('#mcq-grid').on('reset', function(e) {
 		e.preventDefault();
 		
 		var $this = $(this);
@@ -205,5 +208,5 @@ $(document).ready(function() {
 		$submit.html('Load data');
 	});
 	
-	$('.mcq-grid [type="submit"]').prop('disabled', false);
+	$('#mcq-grid [type="submit"]').prop('disabled', false);
 });
